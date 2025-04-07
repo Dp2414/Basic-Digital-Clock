@@ -36,18 +36,31 @@
         .p2{
             font-size: 16px;
         }
+        .clock{
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            align-items: center;
+        }
+        .ampm{
+            font-size: 42px;
+        }
         
     </style>
 </head>
 <body>
     <div class="container">
     <p> <u>Digital Clock</u></p>
+    <div class="clock">
     <div class="container1">
        
         <div class="hours first"></div> <span>:</span>
         <div class="minutes first"></div> <span>:</span>
         <div class="seconds first"></div> 
+       
     </div>
+     <span class="ampm"></span>
+     </div>
 </div>
 
 <p class="p2">Made with 💖 <i>javascript</i></p>
@@ -55,28 +68,54 @@
 const hours=document.querySelector(".hours");
 const minutes=document.querySelector(".minutes");
 const seconds=document.querySelector(".seconds");
+const ampm = document.querySelector(".ampm");
+
 
 function digitalClock(){
 const myTime=new Date();
-
-
 
 let txthour=myTime.getHours();
 let txtminute=myTime.getMinutes();
 let txtsecond=myTime.getSeconds();
 
 
+ let amorpm = txthour >= 12 ? "PM" : "AM";
+ txthour = txthour % 12;
+ if (txthour === 0) {
+  txthour = 12;
+}
+
+
 txthour = txthour.toString().padStart(2, '0');
 txtminute = txtminute.toString().padStart(2, '0');
 txtsecond = txtsecond.toString().padStart(2, '0');
 
-hours.textContent=txthour;
-minutes.textContent=txtminute;
-seconds.textContent=txtsecond;
+ hours.textContent = txthour;
+ minutes.textContent = txtminute;
+seconds.textContent = txtsecond;
+ ampm.textContent = amorpm;
+ 
+
+// if(txthour<12){
+//     document.querySelector('.ampm').innerHTML='  <h1>PM</h1>';
+// }
+// else{
+//     document.querySelector('.ampm').innerHTML='  <h1>AM</h1>';
+// }
+
+//    document.querySelector(".ampm").textContent = ampm;
+
+// }
+
+  
+
+
 
 }
+
 setInterval(digitalClock, 1000)
 digitalClock();
+
 
     </script>
 </body>
